@@ -1,0 +1,105 @@
+library name,title,organism,tissue
+H3K9me2_CEC4_rep1_CSOTN,"ChIP-seq of H3K9me2 in condition CEC4, rep1",Caenorhabditis elegans,embryos
+H3K9me2_CEC4_rep2_CITNQ,"ChIP-seq of H3K9me2 in condition CEC4, rep2",Caenorhabditis elegans,embryos
+H3K9me3_CEC4_rep1_WSITN,"ChIP-seq of H3K9me3 in condition CEC4, rep1",Caenorhabditis elegans,embryos
+H3K9me3_CEC4_rep2_XOMTP,"ChIP-seq of H3K9me3 in condition CEC4, rep2",Caenorhabditis elegans,embryos
+hpl2_CEC4_rep2_CSOTN,"ChIP-seq of hpl2 in condition CEC4, rep2",Caenorhabditis elegans,embryos
+hpl2_CEC4_rep3_CITNQ,"ChIP-seq of hpl2 in condition CEC4, rep3",Caenorhabditis elegans,embryos
+lin61_CEC4_rep1_VJUTG,"ChIP-seq of lin61 in condition CEC4, rep1",Caenorhabditis elegans,embryos
+lin61_CEC4_rep2_COTNQ,"ChIP-seq of lin61 in condition CEC4, rep2",Caenorhabditis elegans,embryos
+H3K9me2_hpl2_rep1_OTMPR,"ChIP-seq of H3K9me2 in condition hpl2, rep1",Caenorhabditis elegans,embryos
+H3K9me2_hpl2_rep2_FKLRS,"ChIP-seq of H3K9me2 in condition hpl2, rep2",Caenorhabditis elegans,embryos
+H3K9me3_hpl2_rep1_OTLCJ,"ChIP-seq of H3K9me3 in condition hpl2, rep1",Caenorhabditis elegans,embryos
+H3K9me3_hpl2_rep2_XOTLD,"ChIP-seq of H3K9me3 in condition hpl2, rep2",Caenorhabditis elegans,embryos
+LEM2_hpl2_rep1_OTLCJ,"ChIP-seq of LEM2 in condition hpl2, rep1",Caenorhabditis elegans,embryos
+LEM2_hpl2_rep2_XOTLD,"ChIP-seq of LEM2 in condition hpl2, rep2",Caenorhabditis elegans,embryos
+lin61_hpl2_rep1_OTLCJ,"ChIP-seq of lin61 in condition hpl2, rep1",Caenorhabditis elegans,embryos
+lin61_hpl2_rep2_CITNR,"ChIP-seq of lin61 in condition hpl2, rep2",Caenorhabditis elegans,embryos
+H3K9me2_hpl2-lin61_rep1_XIRNW,"ChIP-seq of H3K9me2 in condition hpl2-lin61, rep1",Caenorhabditis elegans,embryos
+H3K9me2_hpl2-lin61_rep2_EEOQA,"ChIP-seq of H3K9me2 in condition hpl2-lin61, rep2",Caenorhabditis elegans,embryos
+H3K9me3_hpl2-lin61_rep1_COLQA,"ChIP-seq of H3K9me3 in condition hpl2-lin61, rep1",Caenorhabditis elegans,embryos
+H3K9me3_hpl2-lin61_rep2_QORKA,"ChIP-seq of H3K9me3 in condition hpl2-lin61, rep2",Caenorhabditis elegans,embryos
+hpl2_hpl2-lin61_rep1_XIRNW,"ChIP-seq of hpl2 in condition hpl2-lin61, rep1",Caenorhabditis elegans,embryos
+hpl2_hpl2-lin61_rep2_EEOQA,"ChIP-seq of hpl2 in condition hpl2-lin61, rep2",Caenorhabditis elegans,embryos
+LEM2_hpl2-lin61_rep1_COLQA,"ChIP-seq of LEM2 in condition hpl2-lin61, rep1",Caenorhabditis elegans,embryos
+LEM2_hpl2-lin61_rep2_QORKA,"ChIP-seq of LEM2 in condition hpl2-lin61, rep2",Caenorhabditis elegans,embryos
+H3K9me2_I158A_rep2_CRTSA,"ChIP-seq of H3K9me2 in condition I158A, rep2",Caenorhabditis elegans,embryos
+H3K9me3_I158A_rep1_TGEZB,"ChIP-seq of H3K9me3 in condition I158A, rep1",Caenorhabditis elegans,embryos
+H3K9me3_I158A_rep2_STGOI,"ChIP-seq of H3K9me3 in condition I158A, rep2",Caenorhabditis elegans,embryos
+hpl2_I158A_rep2_VTRSQ,"ChIP-seq of hpl2 in condition I158A, rep2",Caenorhabditis elegans,embryos
+hpl2_I158A_rep3_CRTSA,"ChIP-seq of hpl2 in condition I158A, rep3",Caenorhabditis elegans,embryos
+LEM2_I158A_rep1_QTGCE,"ChIP-seq of LEM2 in condition I158A, rep1",Caenorhabditis elegans,embryos
+LEM2_I158A_rep2_TGEZB,"ChIP-seq of LEM2 in condition I158A, rep2",Caenorhabditis elegans,embryos
+lin61_I158A_rep1_QTGCE,"ChIP-seq of lin61 in condition I158A, rep1",Caenorhabditis elegans,embryos
+lin61_I158A_rep2_ETGCA,"ChIP-seq of lin61 in condition I158A, rep2",Caenorhabditis elegans,embryos
+H3K9me2_lin61_rep1_KDPEK,"ChIP-seq of H3K9me2 in condition lin61, rep1",Caenorhabditis elegans,embryos
+H3K9me2_lin61_rep2_SJFJG,"ChIP-seq of H3K9me2 in condition lin61, rep2",Caenorhabditis elegans,embryos
+H3K9me3_lin61_rep1_DOTHA,"ChIP-seq of H3K9me3 in condition lin61, rep1",Caenorhabditis elegans,embryos
+H3K9me3_lin61_rep2_JWITN,"ChIP-seq of H3K9me3 in condition lin61, rep2",Caenorhabditis elegans,embryos
+hpl2_lin61_rep1_ZJTUD,"ChIP-seq of hpl2 in condition lin61, rep1",Caenorhabditis elegans,embryos
+hpl2_lin61_rep2_KDPEK,"ChIP-seq of hpl2 in condition lin61, rep2",Caenorhabditis elegans,embryos
+LEM2_lin61_rep1_ZJTUD,"ChIP-seq of LEM2 in condition lin61, rep1",Caenorhabditis elegans,embryos
+LEM2_lin61_rep2_DOTHA,"ChIP-seq of LEM2 in condition lin61, rep2",Caenorhabditis elegans,embryos
+lin61_lin61_rep1_ZJTUD,"ChIP-seq of lin61 in condition lin61, rep1",Caenorhabditis elegans,embryos
+lin61_lin61_rep2_FKOZA,"ChIP-seq of lin61 in condition lin61, rep2",Caenorhabditis elegans,embryos
+H3K9me2_met2-set25-set32_rep2_KGJEK,"ChIP-seq of H3K9me2 in condition met2-set25-set32, rep2",Caenorhabditis elegans,embryos
+H3K9me2_met2-set25-set32_rep3_FITKS,"ChIP-seq of H3K9me2 in condition met2-set25-set32, rep3",Caenorhabditis elegans,embryos
+H3K9me3_met2-set25-set32_rep2_OEJHD,"ChIP-seq of H3K9me3 in condition met2-set25-set32, rep2",Caenorhabditis elegans,embryos
+H3K9me3_met2-set25-set32_rep3_FITKS,"ChIP-seq of H3K9me3 in condition met2-set25-set32, rep3",Caenorhabditis elegans,embryos
+hpl2_met2-set25-set32_rep2_KEOJF,"ChIP-seq of hpl2 in condition met2-set25-set32, rep2",Caenorhabditis elegans,embryos
+hpl2_met2-set25-set32_rep3_KGJEK,"ChIP-seq of hpl2 in condition met2-set25-set32, rep3",Caenorhabditis elegans,embryos
+lin61_met2-set25-set32_rep1_AOCKQ,"ChIP-seq of lin61 in condition met2-set25-set32, rep1",Caenorhabditis elegans,embryos
+lin61_met2-set25-set32_rep2_KSIEH,"ChIP-seq of lin61 in condition met2-set25-set32, rep2",Caenorhabditis elegans,embryos
+H3K27me3_N2_rep1_JEOSM,"ChIP-seq of H3K27me3 in condition N2, rep1",Caenorhabditis elegans,embryos
+H3K27me3_N2_rep2_KFRED,"ChIP-seq of H3K27me3 in condition N2, rep2",Caenorhabditis elegans,embryos
+H3K4me3_N2_rep1_QFCZI,"ChIP-seq of H3K4me3 in condition N2, rep1",Caenorhabditis elegans,embryos
+H3K4me3_N2_rep2_SJEPO,"ChIP-seq of H3K4me3 in condition N2, rep2",Caenorhabditis elegans,embryos
+H3K9me2_N2_rep1_JEOSM,"ChIP-seq of H3K9me2 in condition N2, rep1",Caenorhabditis elegans,embryos
+H3K9me2_N2_rep2_KFRED,"ChIP-seq of H3K9me2 in condition N2, rep2",Caenorhabditis elegans,embryos
+H3K9me3_N2_rep1_QFCZI,"ChIP-seq of H3K9me3 in condition N2, rep1",Caenorhabditis elegans,embryos
+H3K9me3_N2_rep2_SJEPO,"ChIP-seq of H3K9me3 in condition N2, rep2",Caenorhabditis elegans,embryos
+hpl2_N2_rep2_JEOSM,"ChIP-seq of hpl2 in condition N2, rep2",Caenorhabditis elegans,embryos
+hpl2_N2_rep5_FRTGE,"ChIP-seq of hpl2 in condition N2, rep5",Caenorhabditis elegans,embryos
+LEM2_N2_rep2_FRTGE,"ChIP-seq of LEM2 in condition N2, rep2",Caenorhabditis elegans,embryos
+LEM2_N2_rep3_QFCZI,"ChIP-seq of LEM2 in condition N2, rep3",Caenorhabditis elegans,embryos
+lin61_N2_rep1_JEOSM,"ChIP-seq of lin61 in condition N2, rep1",Caenorhabditis elegans,embryos
+lin61_N2_rep2_JEOSM,"ChIP-seq of lin61 in condition N2, rep2",Caenorhabditis elegans,embryos
+,,,
+Input_N2_QFCZI,"Input of condition N2, ID:QFCZI",Caenorhabditis elegans,embryos
+Input_N2_SJEPO,"Input of condition N2, ID:SJEPO",Caenorhabditis elegans,embryos
+Input_N2_JEOSM,"Input of condition N2, ID:JEOSM",Caenorhabditis elegans,embryos
+Input_N2_KFRED,"Input of condition N2, ID:KFRED",Caenorhabditis elegans,embryos
+Input_N2_FRTGE,"Input of condition N2, ID:FRTGE",Caenorhabditis elegans,embryos
+Input_I158A_QTGCE,"Input of condition I158A, ID:QTGCE",Caenorhabditis elegans,embryos
+Input_I158A_TGEZB,"Input of condition I158A, ID:TGEZB",Caenorhabditis elegans,embryos
+Input_I158A_STGOI,"Input of condition I158A, ID:STGOI",Caenorhabditis elegans,embryos
+Input_I158A_VTRSQ,"Input of condition I158A, ID:VTRSQ",Caenorhabditis elegans,embryos
+Input_I158A_CRTSA,"Input of condition I158A, ID:CRTSA",Caenorhabditis elegans,embryos
+Input_I158A_ETGCA,"Input of condition I158A, ID:ETGCA",Caenorhabditis elegans,embryos
+Input_CEC4_VJUTG,"Input of condition CEC4, ID:VJUTG",Caenorhabditis elegans,embryos
+Input_CEC4_WSITN,"Input of condition CEC4, ID:WSITN",Caenorhabditis elegans,embryos
+Input_CEC4_XOMTP,"Input of condition CEC4, ID:XOMTP",Caenorhabditis elegans,embryos
+Input_CEC4_CSOTN,"Input of condition CEC4, ID:CSOTN",Caenorhabditis elegans,embryos
+Input_CEC4_CITNQ,"Input of condition CEC4, ID:CITNQ",Caenorhabditis elegans,embryos
+Input_CEC4_COTNQ,"Input of condition CEC4, ID:COTNQ",Caenorhabditis elegans,embryos
+Input_hpl2_OTLCJ,"Input of condition hpl2, ID:OTLCJ",Caenorhabditis elegans,embryos
+Input_hpl2_XOTLD,"Input of condition hpl2, ID:XOTLD",Caenorhabditis elegans,embryos
+Input_hpl2_OTMPR,"Input of condition hpl2, ID:OTMPR",Caenorhabditis elegans,embryos
+Input_hpl2_FKLRS,"Input of condition hpl2, ID:FKLRS",Caenorhabditis elegans,embryos
+Input_hpl2_CITNR,"Input of condition hpl2, ID:CITNR",Caenorhabditis elegans,embryos
+Input_hpl2-lin61_COLQA,"Input of condition hpl2-lin61, ID:COLQA",Caenorhabditis elegans,embryos
+Input_hpl2-lin61_QORKA,"Input of condition hpl2-lin61, ID:QORKA",Caenorhabditis elegans,embryos
+Input_hpl2-lin61_XIRNW,"Input of condition hpl2-lin61, ID:XIRNW",Caenorhabditis elegans,embryos
+Input_hpl2-lin61_EEOQA,"Input of condition hpl2-lin61, ID:EEOQA",Caenorhabditis elegans,embryos
+Input_lin61_ZJTUD,"Input of condition lin61, ID:ZJTUD",Caenorhabditis elegans,embryos
+Input_lin61_DOTHA,"Input of condition lin61, ID:DOTHA",Caenorhabditis elegans,embryos
+Input_lin61_JWITN,"Input of condition lin61, ID:JWITN",Caenorhabditis elegans,embryos
+Input_lin61_KDPEK,"Input of condition lin61, ID:KDPEK",Caenorhabditis elegans,embryos
+Input_lin61_SJFJG,"Input of condition lin61, ID:SJFJG",Caenorhabditis elegans,embryos
+Input_lin61_FKOZA,"Input of condition lin61, ID:FKOZA",Caenorhabditis elegans,embryos
+Input_met2-set25-set32_AOCKQ,"Input of condition met2-set25-set32, ID:AOCKQ",Caenorhabditis elegans,embryos
+Input_met2-set25-set32_KSIEH,"Input of condition met2-set25-set32, ID:KSIEH",Caenorhabditis elegans,embryos
+Input_met2-set25-set32_OEJHD,"Input of condition met2-set25-set32, ID:OEJHD",Caenorhabditis elegans,embryos
+Input_met2-set25-set32_KEOJF,"Input of condition met2-set25-set32, ID:KEOJF",Caenorhabditis elegans,embryos
+Input_met2-set25-set32_KGJEK,"Input of condition met2-set25-set32, ID:KGJEK",Caenorhabditis elegans,embryos
+Input_met2-set25-set32_FITKS,"Input of condition met2-set25-set32, ID:FITKS",Caenorhabditis elegans,embryos

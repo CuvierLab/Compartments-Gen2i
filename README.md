@@ -40,6 +40,12 @@ and for R 4.0.5 :
 - ggVennDiagram : 1.2.2 
 - ggdendro: 0.2.0 
 
+## SEQ DATA ALIGNMENTS
+
+### INIT
+Download required files with src/00_init_project.sh
+Then use related .sh script to align raw data for each sequencing type
+
 
 ## PREPROCESSING
 ### Chromosomes arms
