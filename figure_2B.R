@@ -132,7 +132,7 @@ for (condition in c("CEC4",paste0(c("hpl2","hpl2-lin61","I158A","lin61","met2-se
     
     # Do the plot
     m <- matrix2tibble(sadmat_l[[nm]][["sadmat_cm_mChr"]], bait_bs, anchor_bs)
-    m$counts <- g2ismk::rangeMinMax(m$counts)
+    m$counts <- rangeMinMax(m$counts)
     gg_center <- ggplot2::ggplot(m, ggplot2::aes(x=Anchor, y=Bait, fill=counts)) +
       ggplot2::geom_tile() + theme(axis.text.x = element_text(angle=90),axis.title.y = element_blank(),axis.title.x = element_blank())+
       scale_x_discrete(position="top") +   scale_fill_gradient2(mid = "white",high = "firebrick", low = "dodgerblue") 

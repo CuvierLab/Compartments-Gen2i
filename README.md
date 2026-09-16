@@ -100,3 +100,44 @@ The following additional files must be stored in ChIPseq folder :
 - genes_ce11.bed
 
 If you prefer storing them elsewhere, you will need to adapt scripts for manuscript figures accordingly.
+
+## NAR REVISION (2026)
+
+The scripts at the root of this repository produce the figures of the first
+submission and use its panel numbering. The scripts of the revised version are
+in `revision_2026/` and are named after the panels of the revised manuscript.
+They follow the same conventions: run them from the project root after setting
+the working directory at the top of the file, and store the data in `data/`.
+Each script writes its panels and its source tables to `output/<panel>/`.
+
+| Panel | Script | Analysis |
+| --- | --- | --- |
+| Fig. 3B | `revision_2026/figure_3B.R` | Differential saddle plots, bins ranked by the wild-type PC1 |
+| Fig. 3C | `revision_2026/figure_3C.R` | Corner quantification of the Fig. 3B matrices, ratios B-B/A-A and B-B/B-A |
+| Fig. 3E | `revision_2026/figure_3E.R` | Cumulative plots and within-map contact preferences, PC1 |
+| Supplementary Fig. S5B | `revision_2026/figure_S5B.R` | As Fig. 3B, ranked by the wild-type PC2 |
+| Supplementary Fig. S5C | `revision_2026/figure_S5C.R` | As Fig. 3C, on the PC2-ranked matrices |
+| Supplementary Fig. S5D | `revision_2026/figure_S5D.R` | As Fig. 3E, with compartments called by PC2 |
+
+All six scripts use the Hi-C of the initial batch (`-old` conditions) and its
+wild-type eigenvectors, at 25 kb.
+
+### ADDITIONAL DATA
+
+Besides the files listed above, these scripts read from `data/`:
+
+- `data/ChIPseq/ce11_tiled_25kb.bed`
+- `data/HiC/N2-old_merged.bwa_mem.25kb.pca1.bw` and `...pca2.bw`, the wild-type
+  eigenvectors of the initial batch;
+- `data/HiC/<condition>_25kb.obs_exp.cm.rds`, one observed/expected matrix per
+  genotype, for the cumulative plots;
+- `data/HiC/<condition>_vs_N2-old.bwa_mem.25kb.norm.KR.g2i.h5`, the mutant over
+  wild-type ratio matrices produced by `hicCompare.sh`, for the saddle plots.
+
+### STATISTICS
+
+The bootstrap seeds are fixed in the scripts, so the published values are
+reproduced exactly: 2000 resamplings of the corner pixels for the saddle ratios
+(Fig. 3C, S5C), and an m-out-of-n bootstrap of 1000 contacts per interaction
+class and genotype over 2000 iterations for the contact preferences and for the
+group contrast (Fig. 3E, S5D).
