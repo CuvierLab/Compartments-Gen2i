@@ -110,23 +110,17 @@ it rebuilds the genomic object from the tiled genome and the eigenvector bigwigs
 
 | Panel | Script | Analysis |
 | --- | --- | --- |
-| Fig. 1B | `figure_1B.R` | Wild-type saddle plot, peak density and peak intensity ranked by PC1 |
-| Fig. 2B, 2C | `figure_2B_2C_S4B_S4C.R` | Meta-profiles of PC1 across B-to-A transitions, and their amplitudes |
+| Fig. 2B, 2C | `figure_2B_2C_S4B_S4C.R` | Meta-profiles of PC1 across B-to-A compartment transitions, and their amplitudes |
 | Fig. 3B | `figure_3B.R` | Differential saddle plots, bins ranked by the wild-type PC1 |
 | Fig. 3C | `figure_3C.R` | Corner quantification of the Fig. 3B matrices, ratios B-B/A-A and B-B/B-A |
 | Fig. 3E | `figure_3E.R` | Cumulative plots and within-map contact preferences, PC1 |
-| Fig. 3F | `figure_3F.R` | Ratio of RNA-seq counts, A versus B compartment |
-| Fig. 4A | `figure_4A.R` | Heatmap of peak density ranked by the differential PC1 |
 | Supplementary Fig. S4B, S4C | `figure_2B_2C_S4B_S4C.R` | As Fig. 2B and 2C, for PC2 |
-| Supplementary Fig. S4D | `figure_S4D.R` | Karyoplot of the PC1 profiles along chromosome I |
 | Supplementary Fig. S5B | `figure_S5B.R` | As Fig. 3B, ranked by the wild-type PC2 |
 | Supplementary Fig. S5C | `figure_S5C.R` | As Fig. 3C, on the PC2-ranked matrices |
 | Supplementary Fig. S5D | `figure_S5D.R` | As Fig. 3E, with compartments called by PC2 |
-| Supplementary Fig. S6B | `figure_S6B.R` | Karyoplot of the TAD separation scores along chromosome I |
-| Supplementary Fig. S8A | `figure_S8A.R` | Heatmap of peak intensity ranked by the differential PC1 |
-| Supplementary Fig. S8B | `figure_S8B.R` | Fisher tests between the peak sets of this study and public ones |
-| Supplementary Fig. S8C | `figure_S8C.R` | Overlap of the peak sets of this study |
-| Supplementary Fig. S8E | `figure_S8E.R` | Correlation of the z-score changes between chromatin features |
+
+Every table produced by these scripts was checked against the pipeline that generated the
+published figures: the values are identical.
 
 The Hi-C panels use the initial batch (`-old` conditions) and its wild-type eigenvectors, at
 25 kb. Bootstrap seeds are fixed in the scripts, so the published values are reproduced
@@ -135,9 +129,10 @@ resamplings of the transitions for the meta-profiles (Fig. 2B, 2C, S4B, S4C), an
 m-out-of-n bootstrap of 1000 contacts per interaction class and genotype over 2000
 iterations for the contact preferences and the group contrast (Fig. 3E, S5D).
 
-The scripts of the remaining panels (Fig. 3D, 4C, 4D, 5C and Supplementary Fig. S2A-C, S4F,
-S7D-H, S8D) are being ported from our analysis pipeline and will be added in a further
-version of this deposit.
+The scripts of the remaining panels (Fig. 1B, 3D, 3F, 4A, 4C, 4D, 5C and Supplementary
+Fig. S2A-C, S4D, S4F, S6B, S7D-H, S8A-E) are being ported from our analysis pipeline, or
+checked against the published panels, and will be added in a further version of this
+deposit.
 
 ### ADDITIONAL DATA
 
