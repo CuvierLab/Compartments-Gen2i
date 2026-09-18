@@ -158,13 +158,11 @@ by an earlier run of the pipeline that has since been overwritten, so we cannot 
 script that reproduces them exactly, and we prefer not to publish one that does not.
 
 The Hi-C panels use the initial batch (`-old` conditions) and its wild-type eigenvectors, at
-25 kb. The one exception is Fig. 4D, whose compartment call comes from the PC1 of the merged
-wild-type batch, as in the pipeline that produced the panel. Bootstrap seeds are fixed in the
-scripts, so the published values are reproduced exactly: 2000 resamplings of the corner
-pixels for the saddle ratios (Fig. 3C, S5C), 2000 resamplings of the transitions for the
-meta-profiles (Fig. 2B, 2C, S4B, S4C), and an m-out-of-n bootstrap of 1000 contacts per
-interaction class and genotype over 2000 iterations for the contact preferences and the
-group contrast (Fig. 3E, S5D).
+25 kb. Bootstrap seeds are fixed in the scripts, so the published values are reproduced
+exactly: 2000 resamplings of the corner pixels for the saddle ratios (Fig. 3C, S5C), 2000
+resamplings of the transitions for the meta-profiles (Fig. 2B, 2C, S4B, S4C), and an
+m-out-of-n bootstrap of 1000 contacts per interaction class and genotype over 2000
+iterations for the contact preferences and the group contrast (Fig. 3E, S5D).
 
 Compartment B is defined, here as in the pipeline, as quantile groups 1 to 3 of the 50
 quantiles of the wild-type PC1 of the initial batch (243 tiles of 25 kb); compartment A is
