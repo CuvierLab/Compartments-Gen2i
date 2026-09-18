@@ -2,3 +2,6 @@ data/
 output/
 submission_2024/
 Rplots.pdf
+.Rhistory
+.RData
+.Rproj.user/
