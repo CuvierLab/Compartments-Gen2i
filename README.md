@@ -152,10 +152,24 @@ it rebuilds the genomic object from the tiled genome and the eigenvector bigwigs
 Every table produced by these scripts was checked against the pipeline that generated the
 published figures: the values are identical.
 
-Two panels are not covered here. Fig. 3A comes from the polymer simulations of our
-collaborators and is not part of this deposit. Supplementary Fig. S6C and S6D were produced
-by an earlier run of the pipeline that has since been overwritten, so we cannot guarantee a
-script that reproduces them exactly, and we prefer not to publish one that does not.
+The table above lists the panels this release covers. It is the set of compartment analyses:
+the Hi-C panels built on the principal components, the ChIP-seq panels built on those
+compartments, and the RNA-seq and repeat analyses. Other panels of the paper are produced
+by other means and are not covered here:
+
+- the polymer simulations (Fig. 3A, Fig. 6, Fig. 7, and Supplementary Fig. S10 and S11),
+  which come from our collaborators;
+- the FRAP measurements (Fig. 5H);
+- the aggregate peak analyses (Fig. 5B, 5D, 5F, 5G, Supplementary Fig. S6A and S9) and the
+  peak-density panels (Fig. 5E, 5I);
+- the Hi-C contact maps and the quality-control panels (Fig. 1A, 1C, 2A, Supplementary
+  Fig. S1 and S3);
+- Supplementary Fig. S6C and S6D, produced by an earlier run of our pipeline that has since
+  been overwritten, so we cannot guarantee a script that reproduces them exactly and prefer
+  not to publish one that does not.
+
+The upstream processing of the sequencing data, which every panel depends on, is documented
+in `src/` and in the shell scripts at the root.
 
 The Hi-C panels use the initial batch (`-old` conditions) and its wild-type eigenvectors, at
 25 kb. Bootstrap seeds are fixed in the scripts, so the published values are reproduced
