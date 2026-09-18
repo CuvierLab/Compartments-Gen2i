@@ -13,6 +13,10 @@
 # SOURCE ----
 source("manuscript_lib.R")
 
+# PARAMETERS ----
+out_d <- "output/figure_S6B"
+dir.create(out_d, showWarnings = FALSE, recursive = TRUE)
+
 ### LOAD Whole BED Genome ----
 Go <- loadranges("data/ChIPseq/ce11_noMT.bed",genome = "ce11")
 
@@ -52,10 +56,10 @@ for (condition in c("CEC4",paste0(c("hpl2","hpl2-lin61","lin61","met2-set25-set3
   
   mycol <- RColorBrewer::brewer.pal(length(bw_l),"Set1")
   
-  output <- "figureS4A_"%+%condition
+  # SAVE ----
   for (chr in chr_v) {
-    fn <- paste0("karyo.",chr)
-    png(paste0(output,".",fn,".png"), width = width, height = height)
+    png(file.path(out_d, sprintf("TADscore.%s.karyo.%s.png", condition, chr)),
+        width = width, height = height)
     kp <- karyoploteR::plotKaryotype(genome=subset(Go,seqnames==chr), plot.param=pp,
                                      main = paste0("BigWig signal snapshot \n Zoom on region : " ,chr),
                                      labels.plotter = NULL)

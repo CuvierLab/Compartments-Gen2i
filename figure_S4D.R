@@ -13,8 +13,12 @@
 # SOURCE ----
 source("manuscript_lib.R")
 
+# PARAMETERS ----
+out_d <- "output/figure_S4D"
+dir.create(out_d, showWarnings = FALSE, recursive = TRUE)
+
 # RUN ----
-## CONTACT MATRICES HEATMAP ----
+## PC1 TRACKS ALONG CHROMOSOME I ----
 
 Go <- loadranges("data/ChIPseq/ce11_noMT.bed",genome = "ce11")
 
@@ -53,9 +57,9 @@ for (condition in c("CEC4",paste0(c("hpl2","hpl2-lin61","lin61","met2-set25-set3
   mycol <- RColorBrewer::brewer.pal(length(bw_l),"Set1")
   
   chr <- "I"
-  output <- paste0("./",condition)
-  fn <- paste0("karyo.",chr)
-  png(paste0(output,".",fn,".png"), width = width, height = height)
+  # SAVE ----
+  png(file.path(out_d, sprintf("PC1.%s.karyo.%s.png", condition, chr)),
+      width = width, height = height)
   kp <- karyoploteR::plotKaryotype(genome=subset(Go,seqnames==chr), plot.param=pp,
                                    main = paste0("BigWig signal snapshot \n Zoom on region : " ,chr),
                                    labels.plotter = NULL)

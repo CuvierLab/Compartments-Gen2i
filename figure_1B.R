@@ -13,6 +13,10 @@
 # SOURCE ----
 source("manuscript_lib.R")
 
+# PARAMETERS ----
+out_d <- "output/figure_1B"
+dir.create(out_d, showWarnings = FALSE, recursive = TRUE)
+
 # RUN ----
 ## SADDLEPLOT ----
 ### MCOLS Chr bin ----
@@ -245,7 +249,6 @@ binsize <- params[["binsize"]]
 binFun <- params[["binFun"]]
 chr_v <- params[["chr"]]
 chrAll <- params[["chrAll"]]
-gg <- NULL
 
 # Compute coverage density per peaks and per chromosomes
 Go$chr <- as.character(GenomicRanges::seqnames(Go))
@@ -364,7 +367,6 @@ binsize <- params[["binsize"]]
 binFun <- params[["binFun"]]
 chr_v <- params[["chr"]]
 chrAll <- params[["chrAll"]]
-gg <- NULL
 
 # Compute coverage density per peaks and per chromosomes
 Go$chr <- as.character(GenomicRanges::seqnames(Go))
@@ -388,6 +390,13 @@ htmp_mat <-as.matrix(t(sum_All_dt %>% select(all_of(signal))))
 anno_df <- data.frame(eigen = sum_All_dt %>% select(all_of(ranker)))
 colnames(htmp_mat) <- 1:ncol(htmp_mat)
 rownames(anno_df) <- colnames(htmp_mat)
-gg[[paste0("HeatmapDensity.All_chromosomes.All")]] <- ggplotify::as.ggplot(pheatmap::pheatmap(htmp_mat,cluster_cols = F,color = hcl.colors(50,fixup = T, "RdBu",rev = T),annotation_col = anno_df,cellwidth = 15,cellheight = 15))
+gg[[paste0("HeatmapIntensity.All_chromosomes.All")]] <- ggplotify::as.ggplot(pheatmap::pheatmap(htmp_mat,cluster_cols = F,color = hcl.colors(50,fixup = T, "RdBu",rev = T),annotation_col = anno_df,cellwidth = 15,cellheight = 15))
 
-
+# SAVE ----
+# The two pheatmaps have fixed cell sizes (15 pt), so they need a wider canvas than the
+# saddle plot to fit the 50 columns, the row dendrogram and the two legends.
+for (nm in names(gg)) {
+  wh <- if (grepl("^Saddle", nm)) c(10, 8) else c(17.5, 3.3)
+  ggsave(file.path(out_d, paste0(nm, ".png")), gg[[nm]],
+         width = wh[1], height = wh[2], dpi = 150, limitsize = FALSE)
+}

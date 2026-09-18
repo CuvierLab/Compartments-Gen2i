@@ -13,6 +13,9 @@
 # SOURCE ----
 source("manuscript_lib.R")
 
+out_d <- "output/figure_S8E"
+dir.create(out_d, showWarnings = FALSE, recursive = TRUE)
+
 # RUN ----
 ## GENOMIC DISTANCE ----
 ### MCOLS Chr bin ----
@@ -104,7 +107,12 @@ for (ip in c("H3K9me3","H3K9me2","lin61","hpl2")) {
 
 ### PLOT ----
 
-go <- go2dt(subset(Go, Go$eigen_pca1_N2.old_50tile <= 12 ))
+# Compartment B, as defined for the published panels: quantile groups 1-3 of the
+# 50 quantiles of the initial-batch PC1 (annotation eigen_pca1_N2.old_grps_shifted,
+# "B" = 1-3). The wider definition B = 1-12 (annotation ..._grps_shifted_A_B) gives
+# the same signs for H3K9me2 and LIN-61 but not for H3K9me3 in lin-61; hpl-2.
+go <- go2dt(subset(Go, Go$eigen_pca1_N2.old_50tile <= 3 ))
+cat("tiles in compartment B:", nrow(go), "\n")
 gg <- list()
 for (ip in c("H3K9me3","H3K9me2","lin61")) {
   for (condition in c("hpl2.lin61","met2.set25.set32","hpl2","lin61")) {
@@ -133,3 +141,8 @@ for (ip in c("H3K9me3","H3K9me2","lin61")) {
     
   }
 }
+
+# SAVE ----
+for (nm in names(gg))
+  ggsave(file.path(out_d, paste0(nm, ".png")), gg[[nm]], width = 5, height = 5, dpi = 150)
+fwrite(go, file.path(out_d, "aggregated_zscores_B_tiles.csv"))

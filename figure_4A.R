@@ -13,6 +13,10 @@
 # SOURCE ----
 source("manuscript_lib.R")
 
+# PARAMETERS ----
+out_d <- "output/figure_4A"
+dir.create(out_d, showWarnings = FALSE, recursive = TRUE)
+
 
 ## HEATMAP DENSITY ----
 ### MCOLS Chr bin ----
@@ -68,7 +72,7 @@ for (condition in paste0(c("hpl2","lin61","hpl2-lin61","met2-set25-set32"),"-old
 }
 
 
-### MCOLS INTENSITY ----
+### MCOLS COVERAGE ----
 peaks_lst <- c("H3K4me3_GSE49739.bed",
                "H3K4me1_GSE50262.bed",
                "H3K9me3_GSE49732.bed",
@@ -81,38 +85,30 @@ peaks_lst <- c("H3K4me3_GSE49739.bed",
 
 for (item in c(peaks_lst)) {
   
-  ip  <-  sub("(.*)_GSE.+","\\1",item)
-  params.aname  <-  paste0(ip,"_N2_signal")
-  
+  params.aname = paste0(sub("(.*)_GSE.+","\\1",item),"_peaks_cov")
   params = list(
-    bw_p = paste0("data/ChIPseq/",ip,"_input_normalised.bw"),
-    downstream = 0,
-    upstream = 0,
-    anchor = 'body'
-  )
-  Go2 <- loadranges(paste0("data/ChIPseq/",item),genome = "ce11")
-  
-  Go2 <- bw_to_mcols(bw = params$bw_p,
-                     bed = Go2,
-                     genome = config.genome,
-                     anchor = params$anchor,
-                     name = params.aname,
-                     upstream = params$upstream,
-                     downstream = params$downstream)
-  params.aname <- paste0(ip,"_GEO_N2_max_signal")
-  params = list(
-    aname = paste0(ip,'_N2_signal'),
-    fun = 'max',
-    fun_opts = 'na.rm=T'
+    bychr = TRUE,
+    bed = paste0("data/ChIPseq/",item)
   )
   
-  Go <- aggregate_ranges(Go, Go2, out_mc=params.aname,  subject_mc = params$aname, fun_agr = params$fun,fol_opts = params$fol_opts, fun_opts=params$fun_opts)
+  Go2 <- loadranges(params$bed, genome = "ce11")
+  
+  
+  if (is.null(params$bychr)) {
+    params$bychr <- T
+  }
+  
+  # Go2 <- rangesDB2GO(filterRangesDB(rname = list(in_=list(value=params$rname, strict=TRUE))))
+  mcols(Go)[[params.aname]] <- getCoverageDensity(Go, Go2, bychr=params$bychr)
 }
 
+
 ### PLOT ----
+gg <- list()
+params.aname = c('H3K4me3_peaks_cov', 'H3K4me1_peaks_cov', 'H3K9me3_peaks_cov', 'hpl2_peaks_cov', 'H3K9me2_peaks_cov', 'H3K27ac_peaks_cov', 'H3K27me3_peaks_cov', 'LEM2_peaks_cov', 'lin61_peaks_cov')
 for (condition in paste0(c("hpl2","lin61","hpl2.lin61","met2.set25.set32"),".old")) {
   params = list(
-    signal = c('H3K4me3_GEO_N2_max_signal', 'H3K4me1_GEO_N2_max_signal', 'H3K9me3_GEO_N2_max_signal', 'hpl2_GEO_N2_max_signal', 'H3K9me2_GEO_N2_max_signal', 'H3K27ac_GEO_N2_max_signal', 'H3K27me3_GEO_N2_max_signal', 'LEM2_GEO_N2_max_signal', 'lin61_GEO_N2_max_signal'),
+    signal = c('H3K4me3_peaks_cov', 'H3K4me1_peaks_cov', 'H3K9me3_peaks_cov', 'hpl2_peaks_cov', 'H3K9me2_peaks_cov', 'H3K27ac_peaks_cov', 'H3K27me3_peaks_cov', 'LEM2_peaks_cov', 'lin61_peaks_cov'),
     ranker = paste0('delta_eigen_pca1_',condition,'_N2.old'),
     binsize = 30,
     binFun = 'mean',
@@ -129,7 +125,6 @@ for (condition in paste0(c("hpl2","lin61","hpl2.lin61","met2.set25.set32"),".old
   binFun <- params[["binFun"]]
   chr_v <- params[["chr"]]
   chrAll <- params[["chrAll"]]
-  gg <- NULL
   
   # Compute coverage density per peaks and per chromosomes
   Go$chr <- as.character(GenomicRanges::seqnames(Go))
@@ -143,12 +138,20 @@ for (condition in paste0(c("hpl2","lin61","hpl2.lin61","met2.set25.set32"),".old
   Go_dt[,digitalizedRankingAll:=dplyr::ntile(get(ranker),binsize)]
   # Summarize peak density by digitalized groups from ranking value + Scaling
   sum_meanChr_dt <- data.table(Go_dt %>% dplyr::group_by(digitalizedRankingByChrom) %>% dplyr::summarise_all(binFun,na.rm=T))
-  sum_meanChr_dt[,(signal) := lapply(.SD, function(x) as.vector(rangeMinMax(x, 0, 1))),.SDcols = colnames(sum_meanChr_dt[,.SD,.SDcols = signal])]
+  sum_meanChr_dt[,(signal) := lapply(.SD, function(x) as.vector(rangeMinMax(x, 0, 1))),.SDcols = colnames(sum_meanChr_dt) %in% signal]
   
   htmp_mat <-as.matrix(t(sum_meanChr_dt[.N:1,] %>% select(all_of(signal))))
   anno_df <- data.frame(eigen = sum_meanChr_dt[.N:1,] %>% select(all_of(ranker)))
   colnames(htmp_mat) <- 1:ncol(htmp_mat)
   rownames(anno_df) <- colnames(htmp_mat)
-  gg[[paste0("HeatmapIntensity.Mean_chromosomes.All.",condition)]] <- ggplotify::as.ggplot(pheatmap::pheatmap(htmp_mat,cluster_cols = F,color = hcl.colors(50,fixup = T, "RdBu",rev = T),annotation_col = anno_df,cellwidth = 15,cellheight = 15))
+  gg[[paste0("HeatmapDensity.Mean_chromosomes.All.",condition)]] <- ggplotify::as.ggplot(pheatmap::pheatmap(htmp_mat,cluster_cols = F,color = hcl.colors(50,fixup = T, "RdBu",rev = T),annotation_col = anno_df,cellwidth = 15,cellheight = 15))
   
 }
+
+# SAVE ----
+# The pheatmap cells have a fixed size (cellwidth/cellheight = 15 pt), so the canvas
+# must be large enough for the 30 columns, the row dendrogram and the two legends.
+# (its twin figure_S8A.R uses 13.3 in, which clips the met2-set25-set32 panel: its
+# annotation name is longer.)
+for (nm in names(gg))
+  ggsave(file.path(out_d, paste0(nm, ".png")), gg[[nm]], width = 16, height = 3.3, dpi = 150, limitsize = FALSE)

@@ -13,6 +13,10 @@
 # SOURCE ----
 source("manuscript_lib.R")
 
+out_d <- "output/figure_S8C"
+dir.create(out_d, showWarnings = FALSE, recursive = TRUE)
+gg <- list()
+
 
 
 ## SIMPLE PEAK ANALYZES ----
@@ -77,6 +81,13 @@ for(i in params.aname){
   l[[i]] <- Go[Go[[i]] == T, name]
 }
 
-ggVennDiagram(l,set_color = RColorBrewer::brewer.pal(4,"Set1"))
+gg[["Venn"]] <- ggVennDiagram(l,set_color = RColorBrewer::brewer.pal(4,"Set1"))
 
+# source data: size of every region of the Venn
+venn_dt <- Go[, .N, by = params.aname]
+setorderv(venn_dt, params.aname)
+fwrite(venn_dt, file.path(out_d, "venn_counts.csv"))
 
+# SAVE ----
+for (nm in names(gg))
+  ggsave(file.path(out_d, paste0(nm, ".png")), gg[[nm]], width = 8, height = 8, dpi = 150)

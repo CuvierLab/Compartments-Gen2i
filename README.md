@@ -118,6 +118,15 @@ it rebuilds the genomic object from the tiled genome and the eigenvector bigwigs
 | Supplementary Fig. S5B | `figure_S5B.R` | As Fig. 3B, ranked by the wild-type PC2 |
 | Supplementary Fig. S5C | `figure_S5C.R` | As Fig. 3C, on the PC2-ranked matrices |
 | Supplementary Fig. S5D | `figure_S5D.R` | As Fig. 3E, with compartments called by PC2 |
+| Fig. 1B | `figure_1B.R` | Wild-type saddle plot, and density and intensity of the chromatin marks along the PC1 quantiles |
+| Fig. 3F | `figure_3F.R` | Ratio of RNA-seq counts between compartments A and B, per genotype |
+| Fig. 4A | `figure_4A.R` | Density of the chromatin marks along the quantiles of the mutant-minus-wild-type PC1 |
+| Supplementary Fig. S4D | `figure_S4D.R` | PC1 tracks of chromosome I, mutant over wild type |
+| Supplementary Fig. S6B | `figure_S6B.R` | TAD separation score along chromosome I |
+| Supplementary Fig. S8A | `figure_S8A.R` | As Fig. 4A, for the intensity of the marks |
+| Supplementary Fig. S8B | `figure_S8B.R` | Fisher tests between our peak sets and the published ones |
+| Supplementary Fig. S8C | `figure_S8C.R` | Venn diagram of the HPL-2, LIN-61, H3K9me2 and H3K9me3 peak sets |
+| Supplementary Fig. S8E | `figure_S8E.R` | Aggregated ChIP-seq z-scores in compartment B, mark against HPL-2 |
 
 Every table produced by these scripts was checked against the pipeline that generated the
 published figures: the values are identical.
@@ -129,10 +138,17 @@ resamplings of the transitions for the meta-profiles (Fig. 2B, 2C, S4B, S4C), an
 m-out-of-n bootstrap of 1000 contacts per interaction class and genotype over 2000
 iterations for the contact preferences and the group contrast (Fig. 3E, S5D).
 
-The scripts of the remaining panels (Fig. 1B, 3D, 3F, 4A, 4C, 4D, 5C and Supplementary
-Fig. S2A-C, S4D, S4F, S6B, S7D-H, S8A-E) are being ported from our analysis pipeline, or
-checked against the published panels, and will be added in a further version of this
-deposit.
+The scripts of the remaining panels (Fig. 3D, 4C, 4D, 5C and Supplementary Fig. S2A-C,
+S4F, S7D-H, S8D) are being ported from our analysis pipeline and will be added in a further
+version of this deposit.
+
+Compartment B is defined, here as in the pipeline, as quantile groups 1 to 3 of the 50
+quantiles of the wild-type PC1 of the initial batch (243 tiles of 25 kb); compartment A is
+groups 16 to 50. Fig. S8E uses that definition.
+
+The panels are saved as produced by R. The published figures are the same panels relabelled
+and laid out for print: genotype names in italics, marks written H3K9me2 rather than
+`H3K9me2_GEO_N2_max_signal`, and dendrograms moved. No value differs.
 
 ### ADDITIONAL DATA
 

@@ -24,6 +24,43 @@ library(RColorBrewer)
 library(ggVennDiagram)
 library(ggdendro)
 
+# GENOME ----
+# Reference genome, referred to as config.genome by the figure scripts.
+config.genome <- "ce11"
+
+# Rescales negative values into [nmin, nmax] and positive ones into [pmin, pmax],
+# so that zero stays zero: the asymmetric scale of the Fisher heatmaps.
+# Copied verbatim from our internal plotting library
+# (Snakemake workflow/rules/scripts/R_libraries/g2i_plotfig_lib.R), which is the
+# version that produced the published panels: the range is anchored at +/-1e-4
+# rather than at min(pos)/max(neg), so the smallest odds ratios keep a visible colour.
+rangeMinMaxAsym <- function(x,nmin=-1,nmax=0,pmin=0,pmax=1)
+{
+  neg <- x[x<=0]
+  pos <- x[x>=0]
+  if(length(neg)){
+    if(length(unique(neg))-1)
+      ret_neg <- nmin+((neg- min(c(-0.0001,neg),na.rm=T))*(nmax-nmin)) /(max(c(-0.0001,neg),na.rm=T)-min(c(-0.0001,neg),na.rm=T))
+    else
+      ret_neg <- rep(nmin,length(neg))
+  }else{
+    ret_neg <- NULL
+  }
+  if(length(pos)){
+    if(length(unique(pos))-1)
+      ret_pos <- pmin+((pos- min(c(0.0001,pos),na.rm=T))*(pmax-pmin)) /(max(c(0.0001,pos),na.rm=T)-min(c(0.0001,pos),na.rm=T))
+    else
+      ret_pos <- rep(pmax,length(pos))
+  }else{
+    ret_pos <- NULL
+  }
+  idx_neg <- x<0
+  idx_pos <- x>=0
+  x[idx_neg] <- ret_neg
+  x[idx_pos] <- ret_pos
+  x
+}
+
 # PLOT ----
 dendro_data_k <- function(hc, k) {
   
@@ -403,8 +440,9 @@ fisher.bool.bool <- function(df, grad_cols, grad_rows, verbose=F, identity = F) 
   r_df
 }
 
-fisher_plot_asym_pdf <- function(DF,main="",norm=NULL,range=c(-2,2)){
-  if(!is.null(norm)) DF <- DF %>% mutate(lfc=rangeMinMaxAsym(x = lfc,nmin = -2,nmax=0,pmin = 0,pmax = 2))
+fisher_plot_asym_pdf <- function(DF,main="",norm=T,range=c(-2,2)){
+  if (is.null(norm)) norm <- F
+  if(norm) DF <- DF %>% mutate(lfc=rangeMinMaxAsym(x = lfc,nmin = -2,nmax=0,pmin = 0,pmax = 2))
   colfunc <- colorRampPalette(rev(brewer.pal(n = 11, name = "RdBu")))
   p <- ggplot(DF, aes(x = COL, y = ROW,fill=lfc)) +      geom_tile(col=NA) +
     theme_minimal()+
@@ -428,7 +466,7 @@ fisher_plot_asym_pdf <- function(DF,main="",norm=NULL,range=c(-2,2)){
     ggtitle(main) +
     scale_fill_gradientn(colours = colfunc(10) ,
                          guide = guide_colorbar(barwidth = 0.8,
-                                                title = 'Log2 \nOddsRatio',
+                                                title = paste0(ifelse(norm, 'Scaled\n', ''), 'Log2 \nOddsRatio'),
                                                 label.theme = element_text(size=10, vjust=1, hjust=.5,face = "bold",angle = 0),
                                                 barheight = 10,
                                                 nbin = 20,

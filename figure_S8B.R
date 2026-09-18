@@ -13,6 +13,10 @@
 # SOURCE ----
 source("manuscript_lib.R")
 
+out_d <- "output/figure_S8B"
+dir.create(out_d, showWarnings = FALSE, recursive = TRUE)
+gg <- list()
+
 
 
 ## SIMPLE PEAK ANALYZES ----
@@ -131,7 +135,8 @@ setDT(df)
 df[, pv := as.numeric(pv)]
 mn.pv <- df[pv>0, min(pv)]
 df[, pv := pv+mn.pv]
-ok <- fisher_plot_asym_pdf(DF = df, main = params$title, norm = F, range = c(-2,2))
+fwrite(df, file.path(out_d, "fisher_simple_peaks.csv"))
+gg[["Fisher.Simple_peaks"]] <- fisher_plot_asym_pdf(DF = df, main = params$title, norm = T, range = c(-2,2))
 
 
 
@@ -297,5 +302,9 @@ setDT(df)
 df[, pv := as.numeric(pv)]
 mn.pv <- df[pv>0, min(pv)]
 df[, pv := pv+mn.pv]
-ok <- fisher_plot_asym_pdf(DF = df, main = params$title, norm = F, range = c(-2,2))
+fwrite(df, file.path(out_d, "fisher_double_peaks.csv"))
+gg[["Fisher.Double_peaks"]] <- fisher_plot_asym_pdf(DF = df, main = params$title, norm = T, range = c(-2,2))
 
+# SAVE ----
+for (nm in names(gg))
+  ggsave(file.path(out_d, paste0(nm, ".png")), gg[[nm]], width = 8, height = 8, dpi = 150)

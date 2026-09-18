@@ -13,6 +13,10 @@
 # SOURCE ----
 source("manuscript_lib.R")
 
+# PARAMETERS ----
+out_d <- "output/figure_3F"
+dir.create(out_d, showWarnings = FALSE, recursive = TRUE)
+
 # SETSEED ----
 # Same seed as the pipeline script (86931568e_F3ZZ.R): without it the 50
 # resamplings of 10,000 genes below (sample(.N, 10000)) give different values
@@ -153,3 +157,7 @@ gg[["Boxplot.Ratio_all_conditions"]] <- ggboxplot(plot_dt, x = "condition", y = 
   stat_compare_means(aes(label = ..p.signif..),
                      comparisons = myComp,
                      paired = T) + ylab(y_nm)
+
+# SAVE ----
+for (nm in names(gg))
+  ggsave(file.path(out_d, paste0(nm, ".png")), gg[[nm]], width = 8, height = 8, dpi = 150)
