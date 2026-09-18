@@ -41,7 +41,7 @@ for (pk in peaks_lst) {
     upstream = 0,
     anchor = 'body'
   )
-  Go2 <- g2i:::loadranges("data/ChIPseq/"%+%pk, genome = params$genome)
+  Go2 <- loadranges("data/ChIPseq/"%+%pk, genome = params$genome)
   
   params$ignore.strand <- ifelse(is.null(params$ignore.strand),T,params$ignore.strand)
   
@@ -88,7 +88,7 @@ for (ip in peaks_lst) {
     upstream = 0,
     anchor = 'body'
   )
-  Go2 <- g2i:::loadranges("data/ChIPseq/"%+%pk, genome = params$genome)
+  Go2 <- loadranges("data/ChIPseq/"%+%pk, genome = params$genome)
   
   params$ignore.strand <- ifelse(is.null(params$ignore.strand),T,params$ignore.strand)
   
@@ -173,7 +173,7 @@ for (pk in peaks_lst) {
     upstream = 0,
     anchor = 'body'
   )
-  Go2 <- g2i:::loadranges("data/ChIPseq/"%+%pk, genome = params$genome)
+  Go2 <- loadranges("data/ChIPseq/"%+%pk, genome = params$genome)
   
   params$ignore.strand <- ifelse(is.null(params$ignore.strand),T,params$ignore.strand)
   
@@ -238,7 +238,7 @@ for (ip in peaks_lst) {
     upstream = 0,
     anchor = 'body'
   )
-  Go2 <- g2i:::loadranges("data/ChIPseq/"%+%pk, genome = params$genome)
+  Go2 <- loadranges("data/ChIPseq/"%+%pk, genome = params$genome)
   
   params$ignore.strand <- ifelse(is.null(params$ignore.strand),T,params$ignore.strand)
   

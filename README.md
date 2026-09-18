@@ -40,6 +40,15 @@ and for R 4.0.5 :
 - ggVennDiagram : 1.2.2 
 - ggdendro: 0.2.0 
 
+The scripts added for the revised version were re-run on R 4.5.3 and need, in addition:
+
+- DESeq2 : 1.48.0
+- ggplotify : 0.1.2
+- matrixStats : 1.5.0
+- ggthemes : 5.1.0
+- pheatmap : 1.0.12
+- reshape2 : 1.4.4
+
 ## SEQ DATA ALIGNMENTS
 
 ### INIT
@@ -110,41 +119,60 @@ it rebuilds the genomic object from the tiled genome and the eigenvector bigwigs
 
 | Panel | Script | Analysis |
 | --- | --- | --- |
+| Fig. 1B | `figure_1B.R` | Wild-type saddle plot, and density and intensity of the chromatin marks along the PC1 quantiles |
 | Fig. 2B, 2C | `figure_2B_2C_S4B_S4C.R` | Meta-profiles of PC1 across B-to-A compartment transitions, and their amplitudes |
+| Fig. 2D | `figure_2D.R` | ChIP-seq signal of the chromatin marks in compartment B against compartment A |
 | Fig. 3B | `figure_3B.R` | Differential saddle plots, bins ranked by the wild-type PC1 |
 | Fig. 3C | `figure_3C.R` | Corner quantification of the Fig. 3B matrices, ratios B-B/A-A and B-B/B-A |
+| Fig. 3D | `figure_3D.R` | Hierarchical clustering of the B-compartment contacts of the left arms |
 | Fig. 3E | `figure_3E.R` | Cumulative plots and within-map contact preferences, PC1 |
+| Fig. 3F | `figure_3F.R` | Ratio of RNA-seq counts between compartments A and B, per genotype |
+| Fig. 4A | `figure_4A.R` | Density of the chromatin marks along the quantiles of the mutant-minus-wild-type PC1 |
+| Fig. 4C | `figure_4C.R` | Heatmaps of the mutant-over-wild-type ChIP-seq z-scores around the H3K9me2/3 peaks |
+| Fig. 4D | `figure_4D.R` | Correlation network of the z-score changes across marks and genotypes |
+| Fig. 5C | `figure_5C.R` | ChIP-seq profiles around the HPL-2 + LIN-61 double-positive sites |
+| Supplementary Fig. S2A, S2B, S2C | `figure_S2A_S2B_S2C.R` | Wild-type saddle plots: chromosome I, chromosome III, and ranked by PC2 |
 | Supplementary Fig. S4B, S4C | `figure_2B_2C_S4B_S4C.R` | As Fig. 2B and 2C, for PC2 |
+| Supplementary Fig. S4D | `figure_S4D.R` | PC1 tracks of chromosome I, mutant over wild type |
+| Supplementary Fig. S4F | `figure_S4F.R` | PC2 tracks of the right arm of chromosome I, mutant over wild type |
 | Supplementary Fig. S5B | `figure_S5B.R` | As Fig. 3B, ranked by the wild-type PC2 |
 | Supplementary Fig. S5C | `figure_S5C.R` | As Fig. 3C, on the PC2-ranked matrices |
 | Supplementary Fig. S5D | `figure_S5D.R` | As Fig. 3E, with compartments called by PC2 |
-| Fig. 1B | `figure_1B.R` | Wild-type saddle plot, and density and intensity of the chromatin marks along the PC1 quantiles |
-| Fig. 3F | `figure_3F.R` | Ratio of RNA-seq counts between compartments A and B, per genotype |
-| Fig. 4A | `figure_4A.R` | Density of the chromatin marks along the quantiles of the mutant-minus-wild-type PC1 |
-| Supplementary Fig. S4D | `figure_S4D.R` | PC1 tracks of chromosome I, mutant over wild type |
 | Supplementary Fig. S6B | `figure_S6B.R` | TAD separation score along chromosome I |
+| Supplementary Fig. S7D | `figure_S7D.R` | RNA-seq levels per compartment, by genotype |
+| Supplementary Fig. S7E | `figure_S7E.R` | RNA-seq levels per class of TAD-like structure, by genotype |
+| Supplementary Fig. S7F, S7G | `figure_S7F_S7G.R` | Differential expression of the repeat families, by genotype |
+| Supplementary Fig. S7H | `figure_S7H.R` | Positional enrichment of the deregulated repeat copies |
 | Supplementary Fig. S8A | `figure_S8A.R` | As Fig. 4A, for the intensity of the marks |
 | Supplementary Fig. S8B | `figure_S8B.R` | Fisher tests between our peak sets and the published ones |
 | Supplementary Fig. S8C | `figure_S8C.R` | Venn diagram of the HPL-2, LIN-61, H3K9me2 and H3K9me3 peak sets |
+| Supplementary Fig. S8D | `figure_S8D.R` | As Fig. 4C, for the remaining genotypes and marks |
 | Supplementary Fig. S8E | `figure_S8E.R` | Aggregated ChIP-seq z-scores in compartment B, mark against HPL-2 |
 
 Every table produced by these scripts was checked against the pipeline that generated the
 published figures: the values are identical.
 
-The Hi-C panels use the initial batch (`-old` conditions) and its wild-type eigenvectors, at
-25 kb. Bootstrap seeds are fixed in the scripts, so the published values are reproduced
-exactly: 2000 resamplings of the corner pixels for the saddle ratios (Fig. 3C, S5C), 2000
-resamplings of the transitions for the meta-profiles (Fig. 2B, 2C, S4B, S4C), and an
-m-out-of-n bootstrap of 1000 contacts per interaction class and genotype over 2000
-iterations for the contact preferences and the group contrast (Fig. 3E, S5D).
+Two panels are not covered here. Fig. 3A comes from the polymer simulations of our
+collaborators and is not part of this deposit. Supplementary Fig. S6C and S6D were produced
+by an earlier run of the pipeline that has since been overwritten, so we cannot guarantee a
+script that reproduces them exactly, and we prefer not to publish one that does not.
 
-The scripts of the remaining panels (Fig. 3D, 4C, 4D, 5C and Supplementary Fig. S2A-C,
-S4F, S7D-H, S8D) are being ported from our analysis pipeline and will be added in a further
-version of this deposit.
+The Hi-C panels use the initial batch (`-old` conditions) and its wild-type eigenvectors, at
+25 kb. The one exception is Fig. 4D, whose compartment call comes from the PC1 of the merged
+wild-type batch, as in the pipeline that produced the panel. Bootstrap seeds are fixed in the
+scripts, so the published values are reproduced exactly: 2000 resamplings of the corner
+pixels for the saddle ratios (Fig. 3C, S5C), 2000 resamplings of the transitions for the
+meta-profiles (Fig. 2B, 2C, S4B, S4C), and an m-out-of-n bootstrap of 1000 contacts per
+interaction class and genotype over 2000 iterations for the contact preferences and the
+group contrast (Fig. 3E, S5D).
 
 Compartment B is defined, here as in the pipeline, as quantile groups 1 to 3 of the 50
 quantiles of the wild-type PC1 of the initial batch (243 tiles of 25 kb); compartment A is
-groups 16 to 50. Fig. S8E uses that definition.
+groups 16 to 50. Fig. S8E uses that definition. Fig. 2D and Fig. 4D use the wider call
+B = groups 1 to 12, A = groups 16 to 50, again following the pipeline.
+
+The repeat analysis of Supplementary Fig. S7F-H starts from the count tables; the mapping and
+counting of the repeat copies were done separately and are not part of this deposit.
 
 The panels are saved as produced by R. The published figures are the same panels relabelled
 and laid out for print: genotype names in italics, marks written H3K9me2 rather than
@@ -154,14 +182,27 @@ and laid out for print: genotype names in italics, marks written H3K9me2 rather 
 
 Besides the files listed above, these scripts read from `data/`:
 
-- `data/ChIPseq/ce11_tiled_25kb.bed`;
+- `data/ChIPseq/ce11_tiled_25kb.bed` and `ce11_tiled_10kb.bed`;
+- `data/ChIPseq/leftArm_ce11.bed` and `rightArm_ce11.bed`, produced by `lift_over_chr_arms.R`;
 - `data/HiC/<condition>_merged.bwa_mem.25kb.pca1.bw` and `...pca2.bw`, the eigenvectors of
-  each genotype of the initial batch;
+  each genotype of the initial batch, and `N2_merged.bwa_mem.25kb.pca1.bw`, the wild-type PC1
+  of the merged batch, for Fig. 4D and Supplementary Fig. S7H;
 - `data/HiC/<condition>_25kb.obs_exp.cm.rds`, one observed/expected matrix per genotype, for
   the cumulative plots;
 - `data/HiC/<condition>_vs_N2-old.bwa_mem.25kb.norm.KR.g2i.h5`, the mutant over wild-type
   ratio matrices produced by `hicCompare.sh`, for the saddle plots;
-- `data/HiC/N2-old_merged.bwa_mem.25kb.norm.KR.g2i.h5` for Fig. 1B;
-- `data/HiC/<condition>_merged.bwa_mem.25kb_tad_score.bw` for Supplementary Fig. S6B;
-- the ChIP-seq peak sets and z-score bigwigs listed above, and
-  `data/RNAseq/deseq2_counts_all_conditions.txt` for Fig. 3F.
+- `data/HiC/N2-old_merged.bwa_mem.25kb.norm.KR.g2i.h5` for Fig. 1B and Supplementary
+  Fig. S2A-C, and `<condition>_merged.bwa_mem.25kb.norm.KR.g2i.h5` for Fig. 3D;
+- `data/HiC/<condition>_merged.bwa_mem.25kb_tad_score.bw` for Supplementary Fig. S6B, and
+  `N2-old_merged.bwa_mem.25kb_domains.bed` for Supplementary Fig. S7E;
+- the ChIP-seq peak sets and z-score bigwigs listed above, plus the union and intersection
+  peak sets `H3K9me2_H3K9me3_N2_narrow_union_peakset.bed`,
+  `H3K9me23_lin61_hpl2_optimal_all_cond_peakset.bed` and
+  `hpl2_lin61_N2_sharp_intersect_peakset.bed` produced by `bedtools.sh`, the
+  `<ip>_<condition>_newzs_prof.txt` profiles produced by `computeMatrixProfile.sh`, and the
+  `<ip>_<condition>_vs_N2_zscore.bwa_aln.rmdup.bamCompare.bw` bigwigs;
+- `data/RNAseq/deseq2_counts_all_conditions.txt` and `genes_ce11.bed` for Fig. 3F and
+  Supplementary Fig. S7D, S7E;
+- `data/RNAseq/raw_repeat_counts.txt`, `library_totals.txt`, `size_factors.txt`,
+  `rmsk_ce11.bed`, `rmsk_ce11_annotations.txt` and `rmsk_ce11_genic.txt` for Supplementary
+  Fig. S7F-H.

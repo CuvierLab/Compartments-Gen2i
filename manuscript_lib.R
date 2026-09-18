@@ -61,6 +61,18 @@ rangeMinMaxAsym <- function(x,nmin=-1,nmax=0,pmin=0,pmax=1)
   x
 }
 
+# Sets to NA the values beyond 1.5 IQR, as the boxplots do before they are drawn.
+# Copied verbatim from our internal plotting library
+# (Snakemake workflow/rules/scripts/R_libraries/g2i_plotfig_lib.R).
+remove_outliers <- function(x, na.rm = TRUE, ...) {
+  qnt <- quantile(x, probs=c(.25, .75), na.rm = na.rm, ...)
+  H <- 1.5 * IQR(x, na.rm = na.rm)
+  y <- x
+  y[x < (qnt[1] - H)] <- NA
+  y[x > (qnt[2] + H)] <- NA
+  y
+}
+
 # PLOT ----
 dendro_data_k <- function(hc, k) {
   
@@ -985,7 +997,7 @@ bm2GR <- function(bm_p, genome=NULL, seqLevelStyle = "Ensembl", dropChr="MtDNA")
   ts_v <- paste0("ts",1:x_col)
   colnames(ts_df) <- c("seqnames","start","end",ts_v)
   ts_df$start <- ts_df$start + 1 # avoid overlapping ranges, 0 based here
-  ts_gr <- GenomicRanges::GRanges(ts_df,seqinfo = g2i:::fai_lst[[seqLevelStyle]][[genome]])
+  ts_gr <- GenomicRanges::GRanges(ts_df,seqinfo = fai_lst[[seqLevelStyle]][[genome]])
   if (!is.null(dropChr)) ts_gr <- ts_gr %>% GenomeInfoDb::dropSeqlevels(dropChr,pruning.mode = "coarse")
   ts_gr
 }
