@@ -5,7 +5,7 @@
 # System : x86_64, linux-gnu
 # ============================================================= =
 #
-# Supplementary Figure S5D - cumulative plots of intrachromosomal contacts by interaction
+# Figure 3E - cumulative plots of intrachromosomal contacts by interaction
 # class, and quantification of the contact preferences within each map.
 #
 # Left  : empirical cumulative distributions of z-scored log2(observed/expected)
@@ -27,22 +27,23 @@
 # right panels compare classes within one map, where such a common shift
 # cancels out; this is why A-A can move on the left and not on the right.
 #
-# Figure 3E is the same analysis ranked by PC1: see figure_3E.R.
+# Supplementary Fig. S5D is the same analysis ranked by PC2: see figure_S5D.R.
 # ============================================================= =
 
 # WORKING DIRECTORY ----
-setwd(dir = "config/src/R/github/")
+# Run the scripts from the root of this repository (where manuscript_lib.R sits):
+# setwd("/path/to/Compartments-Gen2i")
 
 # SOURCE ----
 source("manuscript_lib.R")
 library(matrixStats)
 
 # PARAMETERS ----
-out_d      <- "output/figure_S5D"
+out_d      <- "output/figure_3E"
 res        <- "25kb"
 norm       <- "obs_exp"
-eigen_name <- "eigen_pca2_N2.old"                            # PC2 of wild type, initial batch
-eigen_bw   <- "data/HiC/N2-old_merged.bwa_mem.25kb.pca2.bw"
+eigen_name <- "eigen_pca1_N2.old"                            # PC1 of wild type, initial batch
+eigen_bw   <- "data/HiC/N2-old_merged.bwa_mem.25kb.pca1.bw"
 gp_xp      <- c("N2-old", "CEC4", "hpl2-lin61-old", "hpl2-old", "lin61-old", "met2-set25-set32-old")
 ref_xp     <- "N2-old"
 gp_chr_l   <- list(chrom_I_II_III = c("I", "II", "III"),     # "autosomes" of the figure

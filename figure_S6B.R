@@ -7,7 +7,8 @@
 
 
 # WORKING DIRECTORY ----
-setwd(dir = "config/src/R/github/")
+# Run the scripts from the root of this repository (where manuscript_lib.R sits):
+# setwd("/path/to/Compartments-Gen2i")
 
 # SOURCE ----
 source("manuscript_lib.R")
@@ -15,7 +16,7 @@ source("manuscript_lib.R")
 ### LOAD Whole BED Genome ----
 Go <- loadranges("data/ChIPseq/ce11_noMT.bed",genome = "ce11")
 
-for (condition in c("CEC4",paste0(c("hpl2","hpl2-lin61","I158A","lin61","met2-set25-set32"),"-old"))) {
+for (condition in c("CEC4",paste0(c("hpl2","hpl2-lin61","lin61","met2-set25-set32"),"-old"))) {
   bwl <- list()
   bwl["N2-old"] <- "data/HiC/N2-old_merged.bwa_mem.25kb_tad_score.bw"
   bwl[[condition]] <- "data/HiC/"%+%condition%+%"_merged.bwa_mem.25kb_tad_score.bw"

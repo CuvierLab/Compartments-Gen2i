@@ -7,7 +7,8 @@
 
 
 # WORKING DIRECTORY ----
-setwd(dir = "config/src/R/github/")
+# Run the scripts from the root of this repository (where manuscript_lib.R sits):
+# setwd("/path/to/Compartments-Gen2i")
 
 # SOURCE ----
 source("manuscript_lib.R")
@@ -55,7 +56,7 @@ Go2 <- loadranges("data/ChIPseq/hpl2_lin61_N2_narrow_union_peakset.bed",genome =
 
 ### LOAD ZSCORE BIGWIG----
 for (ip in c("H3K9me3","H3K9me2","lin61","hpl2")) {
-  for (condition in c("hpl2.lin61","I158A","met2.set25.set32","hpl2","lin61")) {
+  for (condition in c("hpl2.lin61","met2.set25.set32","hpl2","lin61")) {
     if (condition == "hpl2" & ip == "hpl2") next()
     if (condition == "hpl2.lin61" & ip == "lin61") next()
     
@@ -83,7 +84,7 @@ for (ip in c("H3K9me3","H3K9me2","lin61","hpl2")) {
 ### INHERITS BIGWIG SIGNAL FROM DOUBLE PEAKS ----
 
 for (ip in c("H3K9me3","H3K9me2","lin61","hpl2")) {
-  for (condition in c("hpl2.lin61","I158A","met2.set25.set32","hpl2","lin61")) {
+  for (condition in c("hpl2.lin61","met2.set25.set32","hpl2","lin61")) {
     if (condition == "hpl2" & ip == "hpl2") next()
     if (condition == "hpl2.lin61" & ip == "lin61") next()
     
@@ -106,7 +107,7 @@ for (ip in c("H3K9me3","H3K9me2","lin61","hpl2")) {
 go <- go2dt(subset(Go, Go$eigen_pca1_N2.old_50tile <= 12 ))
 gg <- list()
 for (ip in c("H3K9me3","H3K9me2","lin61")) {
-  for (condition in c("hpl2.lin61","I158A","met2.set25.set32","hpl2","lin61")) {
+  for (condition in c("hpl2.lin61","met2.set25.set32","hpl2","lin61")) {
     if (condition == "hpl2") next()
     if (condition == "hpl2.lin61" & ip == "lin61") next()
     

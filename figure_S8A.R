@@ -1,5 +1,14 @@
+# HEADER ====================================================== =
+# GEN2I
+# Tue Jun 18 18:22:27 2024
+# R version : R version 4.4.0 (2024-04-24)
+# System : x86_64, linux-gnu
+# ============================================================= =
+
+
 # WORKING DIRECTORY ----
-setwd(dir = "config/src/R/github/")
+# Run the scripts from the root of this repository (where manuscript_lib.R sits):
+# setwd("/path/to/Compartments-Gen2i")
 
 # SOURCE ----
 source("manuscript_lib.R")
@@ -30,7 +39,7 @@ Go <- bw_tile(bw = params$bw_p,
               name = params.aname)
 
 
-for (condition in paste0(c("hpl2","lin61","hpl2-lin61","met2-set25-set32","I158A"),"-old")) {
+for (condition in paste0(c("hpl2","lin61","hpl2-lin61","met2-set25-set32"),"-old")) {
   
   dot_cond = sub("-","\\.",condition)
   params.aname = paste0("eigen_pca1_",dot_cond)
@@ -60,23 +69,23 @@ for (condition in paste0(c("hpl2","lin61","hpl2-lin61","met2-set25-set32","I158A
 
 
 ### MCOLS INTENSITY ----
-peaks_lst <- c("H3K4me3_GEO.bwa_aln.rmdup._peaks.narrowPeak_optimal.bed",
-               "H3K4me1_GEO.bwa_aln.rmdup._peaks.narrowPeak_optimal.bed",
-               "H3K9me3_GEO.bwa_aln.rmdup._peaks.narrowPeak_optimal.bed",
-               "hpl2_GEO.bwa_aln.rmdup._peaks.narrowPeak_optimal.bed",
-               "H3K9me2_GEO.bwa_aln.rmdup._peaks.narrowPeak_optimal.bed",
-               "H3K27ac_GEO.bwa_aln.rmdup._peaks.narrowPeak_optimal.bed",
-               "H3K27me3_GEO.bwa_aln.rmdup._peaks.narrowPeak_optimal.bed",
-               "LEM2_GEO.bwa_aln.rmdup._peaks.narrowPeak_optimal.bed",
-               "LIN61_GEO.bwa_aln.rmdup._peaks.narrowPeak_optimal.bed")
+peaks_lst <- c("H3K4me3_GSE49739.bed",
+               "H3K4me1_GSE50262.bed",
+               "H3K9me3_GSE49732.bed",
+               "hpl2_GSE100829.bed",
+               "H3K9me2_GSE113841.bed",
+               "H3K27ac_GSE49734.bed",
+               "H3K27me3_GSE49738.bed",
+               "LEM2_GSE24241.bed",
+               "lin61_GSE49209.bed")
 
 for (item in c(peaks_lst)) {
   
-  ip  <-  sub("(.*)_GEO.+","\\1",item)
+  ip  <-  sub("(.*)_GSE.+","\\1",item)
   params.aname  <-  paste0(ip,"_N2_signal")
   
   params = list(
-    bw_p = paste0("data/ChIPseq/",ip,"_GEO_merged.bwa_aln.rmdup.bamCompare.bw"),
+    bw_p = paste0("data/ChIPseq/",ip,"_input_normalised.bw"),
     downstream = 0,
     upstream = 0,
     anchor = 'body'
@@ -101,9 +110,9 @@ for (item in c(peaks_lst)) {
 }
 
 ### PLOT ----
-for (condition in paste0(c("hpl2","lin61","hpl2.lin61","met2.set25.set32","I158A"),".old")) {
+for (condition in paste0(c("hpl2","lin61","hpl2.lin61","met2.set25.set32"),".old")) {
   params = list(
-    signal = c('H3K4me3_GEO_N2_max_signal', 'H3K4me1_GEO_N2_max_signal', 'H3K9me3_GEO_N2_max_signal', 'hpl2_GEO_N2_max_signal', 'H3K9me2_GEO_N2_max_signal', 'H3K27ac_GEO_N2_max_signal', 'H3K27me3_GEO_N2_max_signal', 'LEM2_GEO_N2_max_signal', 'LIN61_GEO_N2_max_signal'),
+    signal = c('H3K4me3_GEO_N2_max_signal', 'H3K4me1_GEO_N2_max_signal', 'H3K9me3_GEO_N2_max_signal', 'hpl2_GEO_N2_max_signal', 'H3K9me2_GEO_N2_max_signal', 'H3K27ac_GEO_N2_max_signal', 'H3K27me3_GEO_N2_max_signal', 'LEM2_GEO_N2_max_signal', 'lin61_GEO_N2_max_signal'),
     ranker = paste0('delta_eigen_pca1_',condition,'_N2.old'),
     binsize = 30,
     binFun = 'mean',
@@ -136,13 +145,10 @@ for (condition in paste0(c("hpl2","lin61","hpl2.lin61","met2.set25.set32","I158A
   sum_meanChr_dt <- data.table(Go_dt %>% dplyr::group_by(digitalizedRankingByChrom) %>% dplyr::summarise_all(binFun,na.rm=T))
   sum_meanChr_dt[,(signal) := lapply(.SD, function(x) as.vector(rangeMinMax(x, 0, 1))),.SDcols = colnames(sum_meanChr_dt[,.SD,.SDcols = signal])]
   
-  
-  
   htmp_mat <-as.matrix(t(sum_meanChr_dt[.N:1,] %>% select(all_of(signal))))
   anno_df <- data.frame(eigen = sum_meanChr_dt[.N:1,] %>% select(all_of(ranker)))
   colnames(htmp_mat) <- 1:ncol(htmp_mat)
   rownames(anno_df) <- colnames(htmp_mat)
-  
   gg[[paste0("HeatmapIntensity.Mean_chromosomes.All.",condition)]] <- ggplotify::as.ggplot(pheatmap::pheatmap(htmp_mat,cluster_cols = F,color = hcl.colors(50,fixup = T, "RdBu",rev = T),annotation_col = anno_df,cellwidth = 15,cellheight = 15))
   
 }

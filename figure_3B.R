@@ -23,7 +23,8 @@
 # ============================================================= =
 
 # WORKING DIRECTORY ----
-setwd(dir = "config/src/R/github/")
+# Run the scripts from the root of this repository (where manuscript_lib.R sits):
+# setwd("/path/to/Compartments-Gen2i")
 
 # SOURCE ----
 source("manuscript_lib.R")

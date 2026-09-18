@@ -7,10 +7,17 @@
 
 
 # WORKING DIRECTORY ----
-setwd(dir = "config/src/R/github/")
+# Run the scripts from the root of this repository (where manuscript_lib.R sits):
+# setwd("/path/to/Compartments-Gen2i")
 
 # SOURCE ----
 source("manuscript_lib.R")
+
+# SETSEED ----
+# Same seed as the pipeline script (86931568e_F3ZZ.R): without it the 50
+# resamplings of 10,000 genes below (sample(.N, 10000)) give different values
+# at each run.
+set.seed(123)
 
 # RUN ----
 ## RNA SEQ COUNTS RATIO ----
@@ -41,7 +48,7 @@ Go <- bw_tile(bw = params$bw_p,
 ### GENES COUNTS ----
 wb_genes <- loadranges("data/ChIPseq/genes_ce11.bed",genome = "ce11")
 
-for (condition in c("hpl_2I158A","lin61","N2_WT","lin61_hpl2","met2_set25_set32","hpl2")) {
+for (condition in c("lin61","N2_WT","lin61_hpl2","met2_set25_set32","hpl2")) {
   for (rep in "rep" %+% 1:2) {
     params.aname = condition %+% "." %+% rep %+% ".cnts"
     params = list(
@@ -70,7 +77,7 @@ for (condition in c("hpl_2I158A","lin61","N2_WT","lin61_hpl2","met2_set25_set32"
 }
 
 #### DO THE MEAN ----
-for (condition in c("hpl_2I158A","lin61","N2_WT","lin61_hpl2","met2_set25_set32","hpl2")) {
+for (condition in c("lin61","N2_WT","lin61_hpl2","met2_set25_set32","hpl2")) {
   
   params.aname = condition %+% ".mean.cnts"
   params.dependencies = c(condition %+% ".rep1.cnts",condition %+% ".rep2.cnts")
@@ -111,7 +118,7 @@ mcols(wb_genes)[params.aname][!tokeep,] <- NA
 
 ### PLOT ----
 params = list(
-  y = c('N2_WT.mean.cnts', 'hpl2.mean.cnts', 'hpl_2I158A.mean.cnts', 'lin61.mean.cnts', 'lin61_hpl2.mean.cnts', 'met2_set25_set32.mean.cnts'),
+  y = c('N2_WT.mean.cnts', 'hpl2.mean.cnts', 'lin61.mean.cnts', 'lin61_hpl2.mean.cnts', 'met2_set25_set32.mean.cnts'),
   eigenMcol = 'eigen_pca1_N2.old',
   legend = TRUE,
   height = 800,

@@ -1,5 +1,14 @@
+# HEADER ====================================================== =
+# GEN2I
+# Tue Jun 18 18:22:27 2024
+# R version : R version 4.4.0 (2024-04-24)
+# System : x86_64, linux-gnu
+# ============================================================= =
+
+
 # WORKING DIRECTORY ----
-setwd(dir = "config/src/R/github/")
+# Run the scripts from the root of this repository (where manuscript_lib.R sits):
+# setwd("/path/to/Compartments-Gen2i")
 
 # SOURCE ----
 source("manuscript_lib.R")
@@ -11,15 +20,15 @@ source("manuscript_lib.R")
 Go <- loadranges("data/ChIPseq/ce11_tiled_1kb.bed","ce11")
 ### GEO PEAKS ----
 
-peaks_lst <- c("H3K9me3_GEO.bwa_aln.rmdup._peaks.narrowPeak_optimal.bed",
-               "hpl2_GEO.bwa_aln.rmdup._peaks.narrowPeak_optimal.bed",
-               "H3K9me2_GEO.bwa_aln.rmdup._peaks.narrowPeak_optimal.bed",
-               "LIN61_GEO.bwa_aln.rmdup._peaks.narrowPeak_optimal.bed")
+peaks_lst <- c("H3K9me3_GSE49732.bed",
+               "hpl2_GSE100829.bed",
+               "H3K9me2_GSE113841.bed",
+               "lin61_GSE49209.bed")
 
 for (pk in peaks_lst) {
   
   
-  ip  <-  sub("(.*)_GEO.+","\\1",pk)
+  ip  <-  sub("(.*)_GSE.+","\\1",pk)
   
   params.aname = ip %+% "_peaks"
   params = list(
@@ -106,9 +115,9 @@ for (ip in peaks_lst) {
 
 
 ### PLOT ----
-params.aname = c('hpl2_peaks', 'LIN61_peaks', 'H3K9me2_peaks', 'H3K9me3_peaks', 'hpl2_WF_narrowPeak', 'lin61_WF_narrowPeak', 'H3K9me2_WF_narrowPeak', 'H3K9me3_WF_narrowPeak')
+params.aname = c('hpl2_peaks', 'lin61_peaks', 'H3K9me2_peaks', 'H3K9me3_peaks', 'hpl2_WF_narrowPeak', 'lin61_WF_narrowPeak', 'H3K9me2_WF_narrowPeak', 'H3K9me3_WF_narrowPeak')
 params = list(
-  row = c('hpl2_peaks', 'LIN61_peaks', 'H3K9me2_peaks', 'H3K9me3_peaks'),
+  row = c('hpl2_peaks', 'lin61_peaks', 'H3K9me2_peaks', 'H3K9me3_peaks'),
   col = c('hpl2_WF_narrowPeak', 'lin61_WF_narrowPeak', 'H3K9me2_WF_narrowPeak', 'H3K9me3_WF_narrowPeak'),
   height = 800,
   width = 800
@@ -126,20 +135,31 @@ ok <- fisher_plot_asym_pdf(DF = df, main = params$title, norm = F, range = c(-2,
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 ## DOUBLE PEAK ANALYZES ----
 ## TILE 1KB ----
 Go <- loadranges("data/ChIPseq/ce11_tiled_1kb.bed","ce11")
 ### GEO PEAKS ----
 
-peaks_lst <- c("H3K9me3_GEO.bwa_aln.rmdup._peaks.narrowPeak_optimal.bed",
-               "hpl2_GEO.bwa_aln.rmdup._peaks.narrowPeak_optimal.bed",
-               "H3K9me2_GEO.bwa_aln.rmdup._peaks.narrowPeak_optimal.bed",
-               "LIN61_GEO.bwa_aln.rmdup._peaks.narrowPeak_optimal.bed")
+peaks_lst <- c("H3K9me3_GSE49732.bed",
+               "hpl2_GSE100829.bed",
+               "H3K9me2_GSE113841.bed",
+               "lin61_GSE49209.bed")
 
 for (pk in peaks_lst) {
   
   
-  ip  <-  sub("(.*)_GEO.+","\\1",pk)
+  ip  <-  sub("(.*)_GSE.+","\\1",pk)
   
   params.aname = ip %+% "_peaks"
   params = list(
@@ -178,7 +198,7 @@ for (pk in peaks_lst) {
 
 #### DOUBLE PEAKS ----
 for (ip1 in c("H3K9me3","H3K9me2")) {
-  for (ip2 in c("hpl2","LIN61")) {
+  for (ip2 in c("hpl2","lin61")) {
     params.aname <- ip1%+%"_"%+%ip2%+%"_peaks"
     
     params.dependencies = c(ip1%+%"_peaks", ip2%+%"_peaks")
@@ -261,9 +281,9 @@ for (ip1 in c("H3K9me3","H3K9me2")) {
 
 
 ### PLOT ----
-params.aname = c('H3K9me2_hpl2_peaks', 'H3K9me2_LIN61_peaks', 'H3K9me3_hpl2_peaks', 'H3K9me3_LIN61_peaks', 'H3K9me2_hpl2_WF_narrowPeak', 'H3K9me2_lin61_WF_narrowPeak', 'H3K9me3_hpl2_WF_narrowPeak', 'H3K9me3_lin61_WF_narrowPeak')
+params.aname = c('H3K9me2_hpl2_peaks', 'H3K9me2_lin61_peaks', 'H3K9me3_hpl2_peaks', 'H3K9me3_lin61_peaks', 'H3K9me2_hpl2_WF_narrowPeak', 'H3K9me2_lin61_WF_narrowPeak', 'H3K9me3_hpl2_WF_narrowPeak', 'H3K9me3_lin61_WF_narrowPeak')
 params = list(
-  row = c('H3K9me2_hpl2_peaks', 'H3K9me2_LIN61_peaks', 'H3K9me3_hpl2_peaks', 'H3K9me3_LIN61_peaks'),
+  row = c('H3K9me2_hpl2_peaks', 'H3K9me2_lin61_peaks', 'H3K9me3_hpl2_peaks', 'H3K9me3_lin61_peaks'),
   col = c('H3K9me2_hpl2_WF_narrowPeak', 'H3K9me2_lin61_WF_narrowPeak', 'H3K9me3_hpl2_WF_narrowPeak', 'H3K9me3_lin61_WF_narrowPeak'),
   height = 800,
   width = 800
